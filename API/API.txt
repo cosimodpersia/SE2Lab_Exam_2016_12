@@ -3,7 +3,7 @@ info:
   title: Students WS
   description: A web services for the management of students
   version: "1.0.0"
-host: myserver.it
+host: thawing-crag-79220.herokuapp.com
 schemes:
   - https
 basePath: /
