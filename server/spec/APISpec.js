@@ -80,7 +80,7 @@ describe("Test /searchStudent", function() {
 });
 
 describe("test /searchByMark",function(){
-    var data = { criteria: '>1'};
+    var data = { mark: '>1'};
     it("to returns status code 200 if greater",function(done){
         client.post(base_url+"searchByMark", data,function(err,res,body){
             expect(body).toEqual({
@@ -104,7 +104,7 @@ describe("test /searchByMark",function(){
         });
     });
     
-    var data1 = {criteria: '<3'};
+    var data1 = {mark: '<3'};
     it("to returns status code 200 if less",function(done){
         client.post(base_url+"searchByMark", data1,function(err,res,body){
             expect(body).toEqual({

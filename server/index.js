@@ -286,8 +286,8 @@ app.post('/searchByMark', function(request,response){
     var markSearch;
     var direction;
 
-	direction = request.body.criteria.substr(0,1);
-    markSearch = request.body.criteria.substr(1,1);
+	direction = request.body.mark.substr(0,1);
+    markSearch = request.body.mark.substr(1,1);
           
     var stdResponse = [];
     var students= studentManager.getList();
