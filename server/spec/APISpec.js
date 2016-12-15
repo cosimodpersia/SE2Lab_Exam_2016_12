@@ -78,3 +78,53 @@ describe("Test /searchStudent", function() {
 
 
 });
+
+describe("test /searchByMark",function(){
+    var data = { criteria: '>1'};
+    it("to returns status code 200 if greater",function(done){
+        client.post(base_url+"searchByMark", data,function(err,res,body){
+            expect(body).toEqual({
+                student :[
+                    {
+                        ID: "2",
+                        SSN: "A6T4",
+                        name: "Fabio",
+                        address: "via Sommarive",
+                        mark: "6"
+                    },
+                    {
+                        ID: "3",
+                        SSN: "9IK8",
+                        name: "Paolo",
+                        address: "via Trento",
+                        mark: "7"
+                    }
+                ]
+            }):
+        });
+    });
+    
+    var data1 = {criteria: '<3'};
+    it("to returns status code 200 if less",function(done){
+        client.post(base_url+"searchByMark", data1,function(err,res,body){
+            expect(body).toEqual({
+                student :[
+                    {
+                        ID: "1",
+                        SSN: "AB45", 
+                        name: "Mattia",
+                        address: "via Roma",
+                        mark: "5"
+                    },
+                    {
+                        ID: "2",
+                        SSN: "A6T4",
+                        name: "Fabio",
+                        address: "via Sommarive",
+                        mark: "6"
+                    }
+                ]
+            }):
+        });
+    });
+});

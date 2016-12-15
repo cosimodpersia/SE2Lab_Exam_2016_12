@@ -189,6 +189,7 @@ app.post('/deleteStudent', function(request, response)
 
 });
 
+
 /**
  * @brief add a student
  * @return add a student to the list of students
@@ -272,3 +273,41 @@ app.listen(app.get('port'), function() {
 });
 
 //AGGIUNGERE QUI SOTTO NUOVE FUNZIONI
+
+app.post('/searchByMark', function(request,response){
+    var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+    
+    var markSearch;
+    var direction;
+
+	direction = request.body.criteria.substr(0,1);
+    markSearch = request.body.criteria.substr(1,1);
+          
+    var stdResponse = [];
+    var students= studentManager.getList();
+    if(direction == '>'){
+                for(var i=0;i< students.length;i++){
+                    if(students[i].mark > parseInt(markSearch)){
+                        stdResponse.push(students[i]);
+                    }
+                }
+     }else{
+            for(var i=0;i< students.length;i++){
+                    if(students[i].mark < parseInt(markSearch)){
+                        stdResponse.push(students[i]);
+                    }
+                }
+     }
+    var jsonResponse = {
+        student: stdResponse
+    }
+    response.writeHead(200, headers);
+    response.end(JSON.stringify(jsonResponse));
+
+});
